@@ -77,7 +77,11 @@ module.exports = class Agent {
     }
 
     if (this._agent) {
-      this._agent.destroy()
+      try {
+        this._agent.destroy()
+      } catch (e) {
+        console.log('Failed to destroy agent:', e);
+      }
     }
   }
 }

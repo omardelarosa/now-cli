@@ -610,13 +610,19 @@ async function sync({ token, config: { currentTeam, user } }) {
       // Close http2 agent
       now.close()
 
-      // Show build logs
-      if (!quiet) {
-        if (deploymentType === 'static') {
-          console.log(`${chalk.cyan('> Deployment complete!')}`)
-        } else {
-          printLogs(now.host, token, currentTeam, user)
+      try {
+        console.log('[debug] attempting to show build logs');
+        // Show build logs
+        if (!quiet) {
+          if (deploymentType === 'static') {
+            console.log(`${chalk.cyan('> Deployment complete!')}`)
+          } else {
+            printLogs(now.host, token, currentTeam, user)
+          }
         }
+
+      } catch (e) {
+        console.log('Failed to show build logs.', e);
       }
     }
 
@@ -711,13 +717,19 @@ async function sync({ token, config: { currentTeam, user } }) {
       // Close http2 agent
       now.close()
 
-      // Show build logs
-      if (!quiet) {
-        if (deploymentType === 'static') {
-          console.log(`${chalk.cyan('> Deployment complete!')}`)
-        } else {
-          printLogs(now.host, token, currentTeam, user)
+      try {
+        console.log('[debug] Attempting to show build logs.')
+        // Show build logs
+        if (!quiet) {
+          if (deploymentType === 'static') {
+            console.log(`${chalk.cyan('> Deployment complete!')}`)
+          } else {
+            printLogs(now.host, token, currentTeam, user)
+          }
         }
+
+      } catch (e) {
+        console.log('Failed to show build logs.', e);
       }
     }
   })
